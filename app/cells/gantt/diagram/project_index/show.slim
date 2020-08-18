@@ -1,0 +1,9 @@
+.fixed_modal@@modal
+  .background@cancel
+  .modal_wrapper.project_index_modal
+    .values
+      ul
+        - projects.each do |project|
+          li
+            a@href href="#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/#{project.module_enabled?('ganttiot') ? 'gantt' : ''}"
+              = project.name

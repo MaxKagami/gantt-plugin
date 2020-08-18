@@ -1,0 +1,14 @@
+form
+  div@@columnable data={ url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{options[:project].id}/gantt/apply_filter.json"}
+    select#available_columns multiple=true name='query[available_columns][]'
+      - available_columns.each do |col|
+        option value=col.name disabled=col.name.to_s.in?(saved_columns.map(&:to_s)) = col.caption
+    .icon-classic-arrow@right &rArr;
+    .icon-classic-arrow-left@left &lArr;
+    select#column_names multiple=true name='query[column_names][]'
+      - saved_columns.each do |col|
+        - if col.start_with?('cf_')
+          - id = /cf_(?<id>\d+)/.match(col.to_s)&.named_captures&.fetch('id')
+          option value=col = IssueCustomField.find(id).translated_name
+        - else
+          option value=col = I18n.t(:"field_#{col}")

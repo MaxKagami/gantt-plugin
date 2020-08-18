@@ -1,0 +1,6 @@
+<%= content_for(:header_tags) do %>
+  <%= javascript_include_tag('jquery.js', plugin: 'ganttiot') %>
+  <%= javascript_include_tag('gantt.js', plugin: 'ganttiot') %>
+  <%= stylesheet_link_tag('gantt.css', plugin: 'ganttiot') %>
+  <%= stylesheet_link_tag('print.css',  plugin: 'ganttiot', media: 'print') %>
+<% end %>

@@ -1,0 +1,6 @@
+.item@item_hover class="row_#{model.char} row_#{model.char}_#{model.id}" name="#{model.id}"
+  = Gantt::Diagram::BuildChartLineCell.new(model, start: options[:start], stop: options[:stop], baseline: options[:baseline], query: options[:query]).call
+- if model.issues && (model.issue ? ! GanttIssueSetting.find_by(issue_id: model.issue.id, user_id: User.current.id)&.hide_children? : true )
+  = cell(Gantt::Diagram::ChartItemCell, collection: model.issues, start: options[:start], stop: options[:stop], baseline: options[:baseline], query: options[:query])
+- if model.children
+  = cell(Gantt::Diagram::ChartItemCell, collection: model.children, start: options[:start], stop: options[:stop], baseline: options[:baseline], query: options[:query])

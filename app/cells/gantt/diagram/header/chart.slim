@@ -1,0 +1,5 @@
+.heading
+  .top
+    - chart_headers(@start, @stop).each do |hdr|
+      .header title="#{hdr[0]}" style="width: #{header_width}px"
+        = hdr[1]

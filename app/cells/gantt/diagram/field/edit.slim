@@ -1,0 +1,18 @@
+form action='#'
+  - if datatype(options[:field]) == 'date'
+    input type='date' name=options[:field] value=value(options[:field])
+  - elsif datatype(options[:field]) == 'list'
+    select name=options[:field]
+      - values(options[:field]).each do |val, name|
+        - if value(options[:field]) == name
+          option selected='selected' value=val = name
+        - else
+          option value=val = name
+  - elsif options[:field] == 'subject'
+    input type='text' name=options[:field] value=model.subject
+  - elsif datatype(options[:field]) == 'string'
+    input type='text' name=options[:field] value=value(options[:field])
+  - else
+    - if options[:field]
+      input type='text' name=options[:field] value=value(options[:field])
+  input type='image' src="#{Setting.protocol}://#{Setting.host_name}/images/true.png" value='ok' class='submit_button'

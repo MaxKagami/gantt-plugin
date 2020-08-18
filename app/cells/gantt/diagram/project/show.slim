@@ -1,0 +1,11 @@
+div.project_name
+  .field style="width: 52px;"
+  - options[:setting].get_names.index('subject').to_i.times do |i|
+    .field class=[options[:setting].get_names[i]] style="width:#{Gantt::CalcFieldWidth.new.call(options[:setting].get_names[i], nil, options[:root_project])}px;"
+      i
+  - options[:level].times do
+    .indent
+  .icon_project
+  = model.project.name
+= model.issues.sort_by { |nod| nod.issue&.created_on }.map { |iss| Gantt::Diagram::IssueCell.new(iss, root_project: options[:root_project], level: options[:level] + 1, setting: options[:setting], query: options[:query], order: iss.position, pref: [], baseline: options[:baseline]).call }.join
+= cell(Gantt::Diagram::ProjectCell, collection: model.children, root_project: options[:root_project], level: options[:level] + 1, query: options[:query], setting: options[:setting], baseline: options[:baseline])

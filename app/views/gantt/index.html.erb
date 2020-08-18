@@ -1,0 +1,2 @@
+<%= render 'includes' %>
+<%= render html: cell(Gantt::Diagram::LayoutCell, @loader, print: @print, context: { current_user: User.current }) %>

@@ -1,0 +1,38 @@
+div
+  .settings@@settingable@@projects_list data={url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/projects_list.json"}
+    a.button-2.project_switch@open
+      .icon-project
+      | Перейти к проекту
+    form action="#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/baselines"
+      input type='button' value="#{I18n.t(:button_create_ksg)}" class='button-2 issue-new'
+    select@baseline name='baseline_id'
+      option data={url: ''} value=''
+      = project.easy_baselines.map { |base| "<option data-url=\"#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/baseline/#{base&.identifier}\" value=#{base.identifier} #{options[:baseline]&.id == base.id ? 'selected="selected"' : ''}>#{base.name}</option>"}.join
+    - if options[:baseline]
+      div
+        form action="#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/baseline/#{options[:baseline]&.identifier}/renew_dates.json"
+          button.renew-button.button-2 Установить дату
+  .zoom.hideable
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='week' name='query[period_zoom]'
+    /   button week
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='decade' name='query[period_zoom]'
+    /   button 10
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='month' name='query[period_zoom]'
+    /   button month
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='quarter' name='query[period_zoom]'
+    /   button quarter
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='half' name='query[period_zoom]'
+    /   button half
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='year' name='query[period_zoom]'
+    /   button year
+    / = form_for :settings, method: :get do |f|
+    /   input type='hidden' value='project' name='query[period_zoom]'
+    /   button project
+    = cell(Gantt::Diagram::ColumnsCell, model, project: project, setting: options[:setting])
+.filter.hidden

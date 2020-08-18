@@ -1,0 +1,9 @@
+# English strings go here for Rails i18n
+en:
+  baselines:
+    custom_fields:
+      name_plan_start_date: Плановая дата начала
+      name_plan_end_date: Плановая дата окончания
+  field_issue_diff_start: Issue start difference
+  field_issue_diff_end: Issue end difference
+  field_issue_diff_duration: Issue duration difference

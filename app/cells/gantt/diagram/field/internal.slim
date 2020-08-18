@@ -1,0 +1,6 @@
+- if options[:field] == 'subject'
+  = cell(Gantt::Diagram::SubjectCell, model, level: options[:level], baseline: options[:baseline], pref: options[:pref], order: options[:order])
+= value(options[:field])
+
+- if editable?(options[:field], model)
+  .icon-edit@editable

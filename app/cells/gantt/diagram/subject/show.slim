@@ -1,0 +1,17 @@
+.indicator class=Gantt::CalcWorktimeEntries.new(model).call.values.first
+- if model.children.empty?
+  - options[:level].times do
+    .indent
+  / .icon_arrow
+- else
+  - options[:level].times do
+    / .indent
+  - url = "#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project_id}/inline_edit/#{model.id}/switch_close?baseline=#{options[:baseline]&.identifier}"
+  div@@cloasable_issue data-url=url
+    .icon_folder@switch_button
+= numbers
+
+/ - unless model.children.empty?
+  / - url = "#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project_id}/inline_edit/#{model.id}/switch_close?baseline=#{options[:baseline]&.identifier}"
+  / div@@cloasable_issue data-url=url
+    / div.switch@switch_button

@@ -1,0 +1,86 @@
+.gantt.container@@return_to@@chooseable@@excel_import@@chatable@@colourable
+  - unless options[:print]
+    .menu_wrapper@@header_toggle data={type: 'block'}
+      .menu
+        a.button-2.chooseable_button.icon-list-bulleted@chooseable_button
+        .actions_menu
+          a.button-2.hide_rows@hide_rows data-title="Скрыть"
+            .icon-remove
+          a.button-2.remove_rows@remove_rows data-title="Удалить"  
+            .icon-del
+          .colour_rows
+            a.colour_rows-button.button-2 data-title="Цвет фона"
+              .icon-color-background
+            ul
+              li.current-colour
+                .button-2
+                  | Цвет текущей задачи
+                .palette-triangle.palette-triangle-current
+                .colour_rows-palette
+                  a.dark_red@colour_rows name="rgba(204, 153, 153, 0.35)"
+                  a.light_red@colour_rows name="rgba(255, 204, 204, 0.35)"
+                  a.orange@colour_rows name="rgba(255, 204, 153, 0.4)"
+                  a.yellow@colour_rows name="rgba(255, 255, 204, 0.54)"
+                  a.light_green@colour_rows name="rgba(204, 255, 204, 0.68)"
+                  a.dark_green@colour_rows name="rgba(204, 255, 102, 0.4)"
+                  a.light_blue@colour_rows name="rgba(204, 255, 255, 0.78)"
+                  a.dark_blue@colour_rows name="rgba(153, 204, 255, 0.48)"
+                  a.violet@colour_rows name="rgba(204, 153, 255, 0.29)"
+              li.new-colour
+                .button-2
+                  | Цвет новой задачи
+                .palette-triangle.palette-triangle-new
+                .colour_rows-palette
+                  a.dark_red name="rgba(204, 153, 153, 0.35)"
+                  a.light_red name="rgba(255, 204, 204, 0.35)"
+                  a.orange name="rgba(255, 204, 153, 0.4)"
+                  a.yellow name="rgba(255, 255, 204, 0.54)"
+                  a.light_green name="rgba(204, 255, 204, 0.68)"
+                  a.dark_green name="rgba(204, 255, 102, 0.4)"
+                  a.light_blue name="rgba(204, 255, 255, 0.78)"
+                  a.dark_blue name="rgba(153, 204, 255, 0.48)"
+                  a.violet name="rgba(204, 153, 255, 0.29)"
+              li.sample-colour
+                .button-2
+                  | Цвет для типовых задач
+                .palette-triangle.palette-triangle-sample
+                .colour_rows-palette
+                  a.dark_red name="rgba(204, 153, 153, 0.35)"
+                  a.light_red name="rgba(255, 204, 204, 0.35)"
+                  a.orange name="rgba(255, 204, 153, 0.4)"
+                  a.yellow name="rgba(255, 255, 204, 0.54)"
+                  a.light_green name="rgba(204, 255, 204, 0.68)"
+                  a.dark_green name="rgba(204, 255, 102, 0.4)"
+                  a.light_blue name="rgba(204, 255, 255, 0.78)"
+                  a.dark_blue name="rgba(153, 204, 255, 0.48)"
+                  a.violet name="rgba(204, 153, 255, 0.29)"
+        a.button-2@toggle
+          .icon-arrow-down-bold
+          | Настройки
+        a.button-2@import_modal href="#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project.id}/gantt/import.json"
+          .icon-file-xls
+          | Импорт из Excel
+        a.button-2@chat_modal href="#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project.id}/gantt/chat.json"
+          | CHAT
+        div@@new_issuable data={ name: 'issue', url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project.id}/gantt/task.json" }
+      .header
+        = cell(Gantt::Diagram::HeaderCell, query, baseline: baseline, setting: setting)
+  .gantt_main data=(options[:print] ? { block: 'printable' } : {})
+
+    - if options[:print] == 'grid'
+      .grid style="width: #{calc}px;"
+        = cell(Gantt::Diagram::GridCell, projects_tree, query: query, root_project: project, setting: setting, context: { baseline: baseline })
+    - else
+      .grid style="width: #{calc}px;"
+        = cell(Gantt::Diagram::GridCell, projects_tree, query: query, root_project: project, setting: setting, context: { baseline: baseline })
+      .border@@movable data={ url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/update_width.json" }
+        div@border style='width: 100%; height: 100%;'
+          i
+      .chart  
+        = cell(Gantt::Diagram::ChartCell, projects_tree, query: query, setting: setting, context: { baseline: baseline })
+
+  - unless options[:print]
+    .footer
+      - cntrlr = baseline ? 'gantt/baselines' : 'gantt'
+      a.button-2 href="#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/#{cntrlr}/#{baseline&.identifier}?print=grid"  Печать таблицы
+      a.button-2 href="#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/#{cntrlr}/#{baseline&.identifier}?print=all" Печать таблицы и чарта

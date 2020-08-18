@@ -1,0 +1,9 @@
+- if issue
+  .calculated
+    - ksg_entries(options[:baseline]).each do |entry|
+      .entry style="width: #{entry.z_width(zoom)}px; left: #{entry.z_start(options[:start], zoom)}px;" class=entry.kind
+        i
+    .worktime style="width: #{worktime_size.z_width(zoom)}px;"
+      - worktime_entries.each do |entry|
+        .entry style="width: #{entry.z_width(zoom)}px; left: #{entry.z_start(options[:start], zoom)}px;" class=entry.kind
+          i

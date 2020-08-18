@@ -1,0 +1,6 @@
+pub   rsa3072 2019-12-05 [SC] [expires: 2021-12-04]
+      4037EE40D460AE1A348BA1DC059E7EE74F6C1011
+uid                      afalone <afa.alone@gmail.com>
+sub   rsa3072 2019-12-05 [E] [expires: 2021-12-04]
+
+work copy saved-copy-easy_redmine .mozilla .vim .dotfiles .ssh .gnupg

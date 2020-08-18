@@ -1,0 +1,27 @@
+div.issue@@resizable@issue_hover class="issue_#{model.char}_#{model.id}" name="#{model.id}"
+  - pos = 0
+
+  .field.actions style="width: 52px;"
+    = image_tag 'add.png', size: '13x13', class: 'add_action', 'data-role' => 'add_row'  
+    = image_tag 'warning.png', size: '14x14', class: 'warning_action'
+    = image_tag 'email_disabled.png', size: '14x14', class: 'chat_action'
+  .field.chooseable_field
+    input@choose_row type='checkbox' name="#{model.issue.id}" value="1"
+    .submenu  
+      button
+        .icon-list-bulleted
+      ul@@new_issuable@@multimoveable data={ id: issue.id, url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{issue.project_id}/gantt/task.json" }
+        li
+          .button-2@open
+            | Добавить новую задачу
+        li
+          .button-2@send_selected href="#{Setting.protocol}://#{Setting.host_name}/projects/#{issue.project_id}/gantt/move_after.json"
+            | Поместить ниже
+        li
+          .button-2 href="#{Setting.protocol}://#{Setting.host_name}/projects/#{issue.project_id}/gantt/make_children.json" 
+            | Поместить в иерархию
+  
+  = options[:setting].get_names.map { |col| width = Gantt::CalcFieldWidth.new.call(col, model.issue, options[:root_project]).to_i; pos += width; cell(Gantt::Diagram::FieldCell, model.issue, field: col, pos: pos - width, width: width, level: options[:level], order: model.position, pref: options[:pref], setting: options[:setting], baseline: options[:baseline]) }.join
+
+- unless GanttIssueSetting.find_by(issue_id: issue.id, user_id: User.current.id)&.hide_children?
+  = model.issues.select { |i| i.issue.parent_id == model.issue.id }.sort_by { |i| i.issue.created_on }.map { |iss| Gantt::Diagram::IssueCell.new(iss, root_project: options[:root_project], level: options[:level] + 1, query: options[:query], order: iss.position, pref: options[:pref] + [model.position], setting: options[:setting], baseline: options[:baseline]).call }.join

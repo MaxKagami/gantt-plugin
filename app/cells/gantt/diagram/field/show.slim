@@ -1,0 +1,2 @@
+.field@@inline_editable data={name: options[:field], url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project_id}/inline_edit/#{model.id}?name=#{options[:field]}"} class=[options[:field], options[:field] == 'subject' ? 'prime' : nil, options[:field] == 'subject' && hide? ? nil : 'open'] style="left:#{options[:pos]}px;width:#{options[:width]}px;"
+  = render(:internal)

@@ -1,0 +1,10 @@
+ru:
+  button_project_menu_gantt: Гантт
+  button_create_ksg: Создать КСГ
+  baselines:
+    custom_fields:
+      name_plan_start_date: Плановая дата начала
+      name_plan_end_date: Плановая дата окончания
+  field_issue_diff_start: Разность с базовым началом
+  field_issue_diff_end: Разность с базовым концом
+  field_issue_diff_duration: Разность с базовой длительностью

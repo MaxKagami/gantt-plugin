@@ -1,0 +1,915 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+.gantt.container .grid {
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 21px;
+  overflow-x: auto;
+  width: 20%;
+  overflow-y: hidden;
+}
+.gantt.container .grid .indent {
+  display: block;
+  float: left;
+}
+.gantt.container .grid .issue .field .field_value {
+  padding-right: 10px;
+}
+.gantt.container .grid .issue div .switch {
+  float: right;
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  font-size: 12px;
+  line-height: 14px;
+}
+.gantt.container .grid .issue .field form input {
+  height: 20px;
+}
+.gantt.container .grid .issue .field form input:last-child {
+  padding: 2px;
+}
+.gantt.container .grid .issue .field form select {
+  height: 20px;
+  line-height: 11px
+}
+.gantt.container .grid .issue .field form .submit_button {
+  height: 12px;
+}
+.gantt.container .grid .issue {
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+  position: relative;
+  width: 100vw;
+  /* border-bottom: 1px solid #eee3d4;*/
+}
+.touchable {
+  background: #ff00000d !important;
+}
+/*.gantt.container .grid .issue:nth-child(even) { background-color: rgba(223, 204, 175, 0.37); }*/
+.gantt.container .grid .project_name {
+  background-color: #dfccaf5e;
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+  position: relative;
+  width: 100vw;
+  height: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.gantt.container .grid .project_name .indent {
+  width: 20px;
+}
+.gantt.container .grid .project_name .icon_project:before {
+  content: "\F2F6";
+  font-family: "Material Icons", sans-serif;
+  font-size: 13px;
+  color: #009ee0;
+  padding-left: 4px;
+  padding-right: 8px;
+  line-height: 15px;
+}
+.gantt.container .grid .version {
+  position: relative;
+  display: block;
+}
+.gantt.container .grid .heading {
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+}
+.gantt.container .grid .heading .split {
+  min-height: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  flex-shrink: 0;
+  flex-grow: 0;
+ /* z-index: 999;*/
+}
+.gantt.container .split:hover,.gantt.container .split:focus,.gantt.container .split:active {
+  cursor: col-resize;
+}
+.gantt.container .action_split:hover {
+  cursor: not-allowed;
+}
+.gantt.container .grid .heading .header {
+  min-height: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: normal;
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin: 0 3px;
+  line-height: 1;
+}
+.gantt.container .chart {
+  border-bottom: 1px solid #dfccaf;
+}
+.gantt.container .chart .heading .top{
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+}
+.gantt.container .fixed_modal .modal_wrapper {
+  z-index: 1000;
+  left: 37%;
+  position: fixed;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #DCDCDC;
+  box-shadow: 0px 0px 4px #000000;
+  padding: 5px;
+}
+.gantt.container .fixed_modal .modal_wrapper.chat_modal .action_buttons .button {
+  min-height: 3px;
+  line-height: 9px;
+  font-size: 0.7em;
+  color: white;
+  padding: 2px;
+}
+.gantt.container .fixed_modal .modal_wrapper.chat_modal .action_buttons .button.move {
+  background: #e22525;
+  border-color: #b31919;
+}
+.gantt.container .fixed_modal .modal_wrapper.chat_modal .action_buttons .button.done {
+  background: #1cb51c;
+  border-color: green;
+}
+.gantt.container .fixed_modal .modal_wrapper.project_index_modal {
+  top: 10%;
+  height: 80%;
+}
+.gantt.container .fixed_modal .chat_modal {
+  width: 500px;
+  bottom: 10%;
+  top: 10%;
+  padding: 0;
+  overflow: hidden;
+  height: fit-content;
+}
+.gantt.container .fixed_modal .chat_modal .head {
+  background: #f5efe6;
+  padding: 5px;
+  box-shadow: 0px 0px 20px -10px #000000;
+  position: absolute;
+  width: 98%;
+}
+.gantt.container .fixed_modal .chat_modal .body {
+  padding: 5px;
+  margin-top: 10%;
+  margin-bottom: 20%;
+}
+.gantt.container .fixed_modal .chat_modal .body .message {
+  position: relative;
+  margin: 10px 0;
+  padding: 1px 10px;
+  border-radius: 5px;
+  width: fit-content;
+  font-size: 0.8em;
+}
+.gantt.container .fixed_modal .chat_modal .body .message.message-from {
+  background: #af8d4226;
+}
+.gantt.container .fixed_modal .chat_modal .body .message.message-to {
+  float: right;
+  background: #00800014;
+}
+.gantt.container .fixed_modal .chat_modal .body .message .time {
+  font-size: 0.7em;
+  color: #00000069;
+}
+.gantt.container .fixed_modal .chat_modal .footer {
+  padding-top: 9px;
+  background: #f5efe6;
+  padding: 5px;
+  box-shadow: 0px 3px 20px -10px #000000;
+}
+.gantt.container .fixed_modal .chat_modal .footer textarea {
+  margin-bottom: 5px!important;
+}
+.gantt.container .fixed_modal .title {
+  float: left;
+  font-weight: bold;
+}
+.gantt.container .fixed_modal .fixed_buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.gantt.container .fixed_modal .fixed_buttons .icon-false {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.gantt.container .fixed_modal .fixed_buttons .title {
+  font-weight: bold;
+  flex: auto;
+}
+.gantt.container .fixed_modal .fixed_buttons .icon-false:before {
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1;
+}
+.gantt.container .fixed_modal .modal_wrapper.new_issue_modal {
+  z-index: 1000;
+  left: 38%;
+  position: fixed;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #DCDCDC;
+  box-shadow: 0px 0px 4px #000000;
+  padding: 5px;
+  top: 10%;
+  bottom: 10%;
+  width: 18%;
+  height: fit-content;
+}
+.gantt.container .fixed_modal .modal_wrapper.filter_modal {
+  top: 10%;
+  height: 80%;
+  width: 30%;
+  left: 35%;
+  padding: 5px 5px 5px 10px;
+}
+.gantt.container .fixed_modal .modal_wrapper.import_modal {
+  display: grid;
+  grid-template-rows: 30px 100px;
+  top: 33%;
+  height: auto;
+}
+.gantt.container .fixed_modal .import_modal .body #panel {
+  border-style: dotted;
+  border-color: #b1afaf;
+  height: 93%;
+  width: 350px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.gantt.container .fixed_modal .import_modal .body #panel .content span {
+  color: #b1afaf;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 35px 55px;
+  position: absolute;
+}
+.gantt.container .fixed_modal .import_modal .body #panel .content input {
+  position: absolute;
+  top: 34px;
+  left: 5px;
+  width: 97%;
+  height: 72%;
+  opacity: 0;
+}
+.gantt.container .fixed_modal .modal_wrapper .values {
+  display: grid;
+  justify-items: left;
+  overflow-y: auto;
+  width: 100%;
+  height: 96%;
+}
+.gantt.container .fixed_modal .modal_wrapper.new_issue_modal .values {
+  justify-items: left;
+  overflow-y: auto;
+  width: 100%;
+}
+.gantt.container .fixed_modal .modal_wrapper.new_issue_modal .values label {
+  cursor: default;
+  margin-top: 10px;  
+}
+.gantt.container .fixed_modal .background {
+  position: fixed;
+  background-color: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.gantt.container .chart .heading .header {
+  min-height: 21px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: normal;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.grid .field {
+  display: -webkit-box;
+  /*min-height: 21px;*/
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: normal;
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 0 3px;
+  border-right: 2px solid #eee3d4;
+  border-bottom: 1px solid #eee3d4;
+}
+.gantt.container .border {
+  display: block;
+  width: 4px;
+  box-sizing: border-box;
+  background-color: rgba(0, 158, 224, 0.17);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 1;
+}
+.gantt.container .border:hover,.gantt.container .border:focus,.gantt.container .border:active {
+  cursor: col-resize;
+}
+.gantt.container .chart {
+  display: inline-block;
+}
+.gantt.container .chart:after {
+  clear: both;
+}
+.gantt.container .chart .diagram.item {
+  display: block;
+  float: left;
+  width: 10px;
+  height: 10px;
+  min-height: 10px;
+  min-width: 10px;
+  background-color: black;
+}
+.chart {
+  width: 70%;
+  position: relative;
+  overflow-x: auto;
+}
+.chart .item {
+  position: relative;
+  min-height: 15px;
+  background: #faf7f3;
+  border-bottom: 1px solid #eee3d4;
+  box-sizing: border-box;
+  padding-bottom: -1px;
+}
+/*.chart .item:nth-child(even) { 
+  background-color: rgba(223, 204, 175, 0.37);
+  width: 100vw; 
+}*/
+.chart .item .worktime {
+  min-height: 11px;
+  top: 4px;
+  position: absolute;
+  box-sizing: border-box;
+}
+.chart .item .calculated {
+  min-height: 19px;
+  top: 15%;
+  position: absolute;
+  box-sizing: border-box;
+}
+.chart .item .calculated .entry {
+  top: 0px;
+  bottom: 0px;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: rgb(237, 255, 255);
+  border-radius: 2px;
+  border: 1px solid #009ce080;  
+}
+.chart .item .worktime .entry.work {
+  top: 0px;
+  box-sizing: border-box;
+  background-color: green;
+  height: 10px;
+  position: absolute;
+}
+.chart .item .worktime .entry.new {
+  top: 0px;
+  box-sizing: border-box;
+  height: 10px;
+  position: absolute;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0) 49.9%, green 49.9%, green 60%, rgba(0, 0, 0, 0) 60%) fixed, linear-gradient(45deg, green 10%, rgba(0, 0, 0, 0) 10%) fixed;
+  background-size: 0.5em 0.5em;
+  border: 0;
+}
+.chart .item .worktime .entry.closed {
+  top: 0px;
+  box-sizing: border-box;
+  height: 10px;
+  position: absolute;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0) 49.9%, red 49.9%, red 60%, rgba(0, 0, 0, 0) 60%) fixed, linear-gradient(45deg, red 10%, rgba(0, 0, 0, 0) 10%) fixed;
+  background-size: 0.5em 0.5em;
+  border: 0;
+}
+.chart .row_p {
+  background-color: #dfccaf5e!important;
+}
+.easy-content-page {
+  padding: 10px;
+}
+.gantt.container .menu_wrapper .menu {
+  display: flex;
+}
+.gantt.container .menu_wrapper a {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  min-height: 5px;
+  font-size: 11px;
+  line-height: 8px;
+}
+.gantt.container .menu_wrapper a div {
+  margin-right: 5px;
+}
+.gantt.container .menu_wrapper a img {
+  margin-right: 5px;
+  filter: grayscale(100%);
+}
+.gantt.container .menu_wrapper .header {
+  display: block;
+}
+.gantt.container .menu_wrapper .header .zoom.hideable {
+  display: none;
+  padding: 1% 33%;
+}
+.gantt.container .menu_wrapper .header div {
+  display: block;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+}
+.gantt.container .menu_wrapper .header div .zoom {
+  grid-column: 1;
+  grid-row: 1 / 2;
+}
+.gantt.container .menu_wrapper .header div .settings {
+  grid-column: 2;
+  grid-row: 1 / 2;
+}
+.gantt.container .menu_wrapper .header div .settings * {
+  display: inline-block;
+}
+.gantt.container .menu_wrapper .header div .settings form input {
+  height: 2px;
+  margin-right: 10px;
+  font-size: 11px;
+  line-height: 8px;
+}
+.gantt.container .menu_wrapper .header div .zoom form div {
+  display: grid;
+  grid-template-columns: 260px 20px 260px;
+  grid-template-rows: 50px 50px;
+}
+.gantt.container .menu_wrapper .header div .zoom form div #available_columns {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  font-size: 11px;
+}
+
+.gantt.container .menu_wrapper .header div .zoom form div #column_names {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  font-size: 11px;
+}
+.gantt.container .menu_wrapper .header div .zoom form div div {
+  padding-top: 50%;
+  padding-left: 3px;
+}
+.gantt.container .menu_wrapper .header div .zoom form div button {
+  width: 30px;
+  height: 15px;
+  left: 5px;
+  padding: 0 4px;
+}
+.gantt.container .menu_wrapper .header div .zoom form div div:hover {
+  cursor: pointer;
+}
+.gantt.container .menu_wrapper .menu * {
+  display: inline-block;
+}
+.gantt.container .menu_wrapper .menu .chooseable_button {
+  padding: 5px 3px;
+}
+.gantt.container .menu_wrapper .menu .chooseable_cancel {
+  padding: 4px 1px;
+  background: #d94838;
+  color: white;
+  border-color: transparent;
+  font-size: inherit;
+  height: fit-content;
+}
+.gantt.container .menu_wrapper .menu .actions_menu {
+  display: none;
+}
+.gantt.container .menu_wrapper .menu .actions_menu {
+  display: none;
+}
+.gantt.container .menu_wrapper .menu .hide_rows {
+  /*display: none;*/
+  padding: 5px 0px 5px 4px;
+}
+.gantt.container .menu_wrapper .menu .hide_rows:hover:after {
+  content: attr(data-title);
+  position: absolute;
+  right: -50%;
+  bottom: 130%;
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  font-size: 9px;
+  padding: 3px;
+  border: 1px solid #33333330;
+}
+.gantt.container .menu_wrapper .menu .remove_rows {
+  /*display: none;*/
+  padding: 5px 0px 5px 4px;
+}
+.gantt.container .menu_wrapper .menu .remove_rows:hover:after {
+  content: attr(data-title);
+  position: absolute;
+  right: -50%;
+  bottom: 130%;
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  font-size: 9px;
+  padding: 3px;
+  border: 1px solid #33333330;
+}
+.gantt.container .menu_wrapper .menu .colour_rows .colour_rows-button {
+  padding: 5px 0px 5px 4px;
+}
+.gantt.container .menu_wrapper .menu .colour_rows .colour_rows-button:hover:after {
+  content: attr(data-title);
+  position: absolute;
+  right: -50%;
+  bottom: 130%;
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  font-size: 9px;
+  padding: 3px;
+  border: 1px solid #33333330;
+}
+.gantt.container .menu_wrapper .menu .colour_rows:hover ul {
+  display: grid;
+}
+.gantt.container .menu_wrapper .menu .colour_rows ul {
+  display: none;
+  margin: 0;
+  position: absolute;
+  left: 31px;
+  z-index: 10;
+  transition: 0.5s ease-in-out;
+  padding: 0;
+}
+.gantt.container .menu_wrapper .menu .colour_rows ul li:hover .colour_rows-palette {
+  display: grid;
+}
+.gantt.container .menu_wrapper .menu .colour_rows ul li.current-colour:hover .palette-triangle-current {
+  display: block;
+  top: 10%;
+}
+.gantt.container .menu_wrapper .menu .colour_rows ul li.new-colour:hover .palette-triangle-new {
+  display: block;
+  top: 35%;
+}
+.gantt.container .menu_wrapper .menu .colour_rows ul li.sample-colour:hover .palette-triangle-sample {
+  display: block;
+  top: 62%;
+}
+.gantt.container .menu_wrapper .menu .colour_rows ul li div {
+  width: -webkit-fill-available;
+  line-height: 0.5rem;
+  min-height: auto;
+  text-align: center;
+}
+.gantt.container .menu_wrapper .menu .palette-triangle {
+  right: 63%;
+  position: absolute;
+  left: 0;
+  display: none;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-right: 10px solid #009ee0;
+  border-bottom: 10px solid transparent;
+  z-index: 1000;
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 6%;
+  left: 100%;
+  grid-template-columns: 16px 16px 16px;
+  grid-gap: 2px;
+  background-color: #009ee0;
+  padding: 1px;
+  border-radius: 0.3em;
+  margin-right: 128px;
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette a {
+  cursor: pointer;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+  border: .1em solid #009ee0;
+  border-radius: 0.3em;
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .dark_red {
+  background: rgb(204, 153, 153);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .light_red {
+  background: rgb(255, 204, 204);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .orange {
+  background: rgb(255, 204, 153);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .yellow {
+  background: rgba(255, 255, 130, 0.46);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .light_green {
+  background: rgb(166, 255, 166);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .dark_green {
+  background: rgba(204, 255, 102, 0.77);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .light_blue {
+  background: rgb(176, 255, 255);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .dark_blue {
+  background: rgb(157, 206, 255);
+}
+.gantt.container .menu_wrapper .menu .colour_rows-palette .violet {
+ background: rgba(204, 153, 255, 0.76);
+}
+
+.gantt.container .menu_wrapper .header div form .renew-button {
+  height: 25px;
+  font-size: 11px;
+  line-height: 10px;
+  margin-right: 10px;
+}
+.gantt.container .menu_wrapper .header div .settings form {
+  position: absolute;
+  top: 8px;
+  right: 360px;
+}
+.gantt.container .menu_wrapper .header div .settings select {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 11px;
+  height: 20px;
+}
+.gantt.container .menu_wrapper .header div .settings .project_switch {
+  position: absolute;
+  top: 10px;
+  right: 462px;
+}
+.gantt.container .gantt_main {
+  display: flex;
+  flex-flow: row nowrap;
+  height: auto;
+  border: 1px solid #dfccaf;
+  box-shadow: inset 0px 1px 1px 0px rgba(0, 0, 0, 0.125);
+  border-radius: 2px;
+}
+.gantt.container .grid .issue .field .indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 7px;
+  margin: 6px;
+}
+.gantt.container .grid .issue .field .indicator.before {
+  background: #bbbbbb;
+  box-shadow: 0px 0px 0px 4px #bbbbbb6e;
+}
+.gantt.container .grid .issue .field .indicator.late {
+  background: #bbbbbb;
+  box-shadow: 0px 0px 0px 4px #ff00002b;
+}
+.gantt.container .grid .issue .field .indicator.in_work {  
+  background: #4CAF50;
+  box-shadow: 0px 0px 0px 4px #4caf505c;
+}
+.gantt.container .grid .issue .field .indicator.two_days {
+  background: #4caf50bf;
+  box-shadow: 0px 0px 0px 4px #ffcf0087;
+}
+.gantt.container .grid .issue .field .indicator.work_late {
+  background: #ff0000b5;
+  box-shadow: 0px 0px 0px 4px #ffab006e;
+}
+.gantt.container .grid .issue .field .indicator.late_critical {
+  background: #ff0000f7;
+  box-shadow: 0px 0px 0px 4px #ff00004d;
+}
+.gantt.container .grid .issue .field .indicator.done {
+  margin: 2px 4px !important;
+  padding-right: 4px;
+}
+.gantt.container .grid .issue .field .indicator.done:before {
+  content: "\2713";
+  font-size: 12px;
+  line-height: 1;
+  font-weight: bolder;
+  color: #168c1a;
+}
+.gantt.container .grid .issue .field .numbers {
+  margin: 0;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  white-space: nowrap;
+  user-select: none;
+}
+.gantt.container .grid .issue .field .icon-edit {
+  visibility: hidden;
+  cursor: pointer;
+  width: 1.5em !important;
+  background: #ffffff;
+  color: #42321a;
+  border: 1px solid transparent;
+  border-color: #dfccaf;
+  border-radius: 1.5em;
+  font-size: 80%;
+  right: -1em;
+  display: inline-block;
+  line-height: 1.5em;
+  text-align: center;
+}
+.gantt.container .grid .issue .field .icon-edit:hover {
+  background: #41b35a;
+  color: #ffffff;
+  border-color: #3aa051;
+  cursor: pointer;
+}
+.gantt.container .grid .issue .field.actions img.add_action {
+  margin-left: 2px;
+  cursor: pointer;
+}
+.gantt.container .grid .issue .field.actions img.warning_action {
+  margin-left: 1px; 
+  margin-right: 3px;
+  filter: grayscale(100%);
+  cursor: pointer;
+}
+.gantt.container .grid .issue .field.actions img.chat_action {
+  margin-top: 1px;
+  cursor: pointer;
+}
+.gantt.container .grid .issue .field.chooseable_field {
+  display: none;
+  width: 52px;
+}
+.gantt.container .grid .issue .field.chooseable_field * {
+  display: inline-block;
+}
+.gantt.container .grid .issue .field.chooseable_field input {
+  margin: 10% 0 0 25%;
+}
+.gantt.container .grid .issue:hover .field .icon-edit {
+  visibility: visible;
+}
+.gantt.container .grid .issue .field.chooseable_field .submenu button {
+  padding: 0;
+  margin-left: 2px;
+  height: 13px;
+  width: 13px;
+  line-height: 0.5;
+  font-size: smaller;
+  vertical-align: -webkit-baseline-middle;
+}
+.gantt.container .grid .issue .field.chooseable_field .submenu:hover ul {
+  display: grid;
+}
+.gantt.container .grid .issue .field.chooseable_field .submenu ul {
+  display: none;
+  margin: 0;
+  position: absolute;
+  left: 31px;
+  z-index: 10;
+  transition: 0.5s ease-in-out;
+  padding: 0;
+}
+.gantt.container .grid .issue .field.chooseable_field .submenu ul li div {
+  width: -webkit-fill-available;
+  line-height: 0.5rem;
+  min-height: auto;
+  text-align: center;
+}
+.gantt.container .grid .heading .header {
+  position: relative;
+  padding: 0 2px;
+  text-align: center;
+}
+.gantt.container .grid .heading .header .header_text {
+  display: inline-block;
+  font-weight: bold;
+  vertical-align: -webkit-baseline-middle;
+  vertical-align: -moz-middle-with-baseline;
+  text-align: center;
+}
+.gantt.container .grid .heading .header .choose_all {
+  display: none;
+  margin: 4px 0 0 0;
+}
+.gantt.container .grid .heading .header .filter {
+  position: absolute;
+  top: 0;
+  right: -5px;
+}
+.gantt.container .grid .heading .header .filter img {
+  margin-right: 2px;
+  cursor: pointer;
+}
+.gantt.container .grid .heading .header .filter.avail {
+  filter: brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+}
+.gantt.container .grid .heading .header .filter.avail img {
+  margin-right: 2px;
+  cursor: pointer;
+
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+.gantt.container .header div .zoom form div *::-webkit-scrollbar {
+  width: 4px;
+  height: 3px;
+}
+.gantt.container .grid .issue .indent {
+  padding-left: 10px;
+  padding: 13px;
+}
+.gantt.container .grid .issue .indent:nth-last-of-type(1) {
+  padding-right: 11px;
+}
+.gantt.container .grid .issue .icon_arrow {
+  width: 13px;
+  height: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 7px;
+}
+.gantt.container .grid .issue .icon_arrow:before {
+  content: '\21B3';
+}
+.gantt.container .grid .issue .icon_folder {
+  width: 23px;
+  margin-left: 3px;
+}
+.gantt.container .grid .issue .icon_folder:hover {
+  cursor: pointer;
+}
+.gantt.container .grid .issue .icon_folder:before {
+  content: url(data:image/gif;base64,R0lGODlhEgASAJECAJeXl7Gvrf///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTAyMTU1RTNDMDZEMTFFMUJGNzZCRThBRkFCRjg4MTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTAyMTU1RTRDMDZEMTFFMUJGNzZCRThBRkFCRjg4MTIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MDIxNTVFMUMwNkQxMUUxQkY3NkJFOEFGQUJGODgxMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MDIxNTVFMkMwNkQxMUUxQkY3NkJFOEFGQUJGODgxMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAIALAAAAAASABIAAAIwlI+pywcPm3mhWgkCsjBOvVkimElG9ZlCuYIY6TYs+6bmHDO4igfdD3GNhheV0VQAADs=);
+  transform: scale(.8);
+}
+.gantt.container .grid .issue .open .icon_folder:before {
+  content: url(data:image/gif;base64,R0lGODlhEgASAJECAJeXl7Gvrf///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTdDRDM3QzVDMDZEMTFFMUJGMzhFMDhCN0RGRjBGQ0YiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTdDRDM3QzZDMDZEMTFFMUJGMzhFMDhCN0RGRjBGQ0YiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1N0NEMzdDM0MwNkQxMUUxQkYzOEUwOEI3REZGMEZDRiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMzdDNEMwNkQxMUUxQkYzOEUwOEI3REZGMEZDRiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAIALAAAAAASABIAAAIzlI+pywcPm3mhWgkCsjBOvVkimElG9ZlCBlXd+2XjjLKg5GqoeZXqvsOQXK/ijUZTKVUFADs=);
+  transform: scale(.8);
+}
+.gantt.container .chart .heading .top .header {
+  line-height: 20px;
+  font-size: 10px;
+  cursor: pointer;
+  border-left: 2px solid #dfccaf;
+  text-align: center;
+  font-weight: bold;
+}
+.gantt.container .menu form input.button-2 {
+  height: 25px;
+  font-size: 11px;
+  line-height: 11px;
+}
+.gantt.container .footer {
+  padding-top: 9px;
+}
+.gantt.container .footer .button-2 {
+  margin-right: 10px;
+  min-height: 8px;
+  font-size: 11px;
+  line-height: 8px;
+}
+
+.subject .cur_ok {
+  background-color: #0f6a08
+}
+.subject .cur_late {
+  background-color: #d11507
+}
+.subject .ksg_ok {
+  background-color: #0f6a08
+}
+.subject .ksg_late {
+  background-color: #d11507
+}
+.subject .cur_ok.ksg_ok {
+  background-color: #DFFF00
+}
+.subject .cur_ok.ksg_late {
+  background-color: #FFCC99
+}
+.subject .cur_late.ksg_ok {
+  background-color: #E0B0FF
+}
+.subject .cur_late.ksg_late {
+  background-color: #DFFF00
+}

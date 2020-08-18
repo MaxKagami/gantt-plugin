@@ -1,0 +1,44 @@
+.fixed_modal@@issue data={ name: 'issue', url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{model.project_id}/gantt/task.json" }
+  .background@cancel
+  .modal_wrapper.new_issue_modal
+    .fixed_buttons
+      button@ok name='submit' class=%w[ button-positive ui-button ui-corner-all ui-widget ]
+        span Сохранить
+      button@cancel name='cancel' class=%w[ button ui-button ui-corner-all ui-widget ]
+        span Отмена
+    .values
+      label Тема
+      input name='subject' type='text' value=model.subject
+      input type='hidden' name='project_id' value=model.project_id
+      input type='hidden' name='author_id' value=model.author_id
+      label Тип задачи
+      select name='tracker_id'
+        - avail_trackers.each do |t|
+          - if t.first != model.tracker_id
+            option value=t.first
+              = t.last
+          - else
+            option selected=true value=t.first
+              = t.last
+      label Родительская задача
+      select name='parent_id'
+        - (['', ''] + avail_tasks).each do |u|
+          - if u.first != model.assigned_to_id
+            option value=u.first 
+              = u.last
+          - else
+            option selected=true value=u.first
+              = u.last
+      label Назначена
+      select name='assigned_to_id'
+        - avail_users.each do |u|
+          - if u.first != model.assigned_to_id
+            option value=u.first 
+              = u.last
+          - else
+            option selected=true value=u.first
+              = u.last
+      label Описание
+      textarea name='description' value=model.description
+      / input name='subject' type='text' value=model.subject
+

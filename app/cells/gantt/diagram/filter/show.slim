@@ -1,0 +1,19 @@
+.fixed_modal@@modal data={ name: model[:name], url: "#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/apply_filter.json" }
+  .background@cancel
+  - unless values.blank?
+    .modal_wrapper.filter_modal
+      .fixed_buttons
+        .title
+          | Фильтрация
+        .icon.icon-true@ok
+        .icon.icon-del@clear
+        .icon.icon-false@cancel
+      .values
+        - sel = JSON.parse(options[:setting].query_params || '{}')
+        - values.each do |val|
+          label
+            - if val.id.to_s.in?(sel[model[:name]] || [])
+              input type='checkbox' checked='checked' name="#{model[:name]}[#{val.id}]" value=val.id
+            - else
+              input type='checkbox' name="#{model[:name]}[#{val.id}]" value=val.id
+            = val.name

@@ -1,0 +1,2 @@
+= cell(Gantt::Diagram::HeaderCell, options[:query], baseline: options[:baseline]).call(:chart, start, stop)
+= cell(Gantt::Diagram::ChartItemCell, collection: model, projects_cache: projects, issues_cache: issues, start: start, stop: stop, baseline: baseline, query: options[:query])
