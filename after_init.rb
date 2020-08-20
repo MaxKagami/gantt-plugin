@@ -12,7 +12,7 @@ ActiveSupport::Dependencies.autoload_paths << app_dir.join('cells')
 Dir[lib_dir.join('ganttiot/redmine_patch/**/*.rb')].each { |file| require_dependency file }
 Dir[lib_dir.join('ganttiot/*.rb')].each { |file| require_dependency file }
 
-Rails.application.config.assets.precompile += %w[gantt.css gantt.js]
+Rails.application.config.assets.precompile += %w[gantt.sass gantt.js]
 
 Rails.application.configure do
   config.reform.enable_active_model_builder_methods = true
