@@ -923,8 +923,8 @@ evil.block('@@colourable',
       var issues = [];
       $('.chooseable_field input:checked').each(function () {
         var id = $(this).attr('name');
-        // $(".issue_i_" + id).css("background", colour);
-        // $(".row_i_" + id).css("background", colour);
+        $(".issue_i_" + id).css("background", colour);
+        $(".row_i_" + id).css("background", colour);
         issues.push(id);
         $(this).prop('checked', false);
       })

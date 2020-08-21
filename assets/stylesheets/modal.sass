@@ -1,0 +1,149 @@
+.gantt
+  .fixed_modal
+    .background
+      position: fixed
+      background-color: rgba(0,0,0,0.4)
+      top: 0
+      left: 0
+      right: 0
+      bottom: 0
+      z-index: 1
+    .fixed_buttons
+      display: flex
+      justify-content: flex-end
+      .icon-false
+        margin-left: 10px
+        cursor: pointer
+        &:before
+          font-size: 17px
+          font-weight: bold
+          line-height: 1
+      .title
+        font-weight: bold
+        flex: auto
+    .modal_wrapper
+      z-index: 1000
+      left: 37%
+      position: fixed
+      overflow-y: auto
+      background-color: white
+      border: 1px solid #DCDCDC
+      box-shadow: 0px 0px 4px #000000
+      padding: 5px
+      &.chat_modal .action_buttons .button
+        min-height: 3px
+        line-height: 9px
+        font-size: 0.7em
+        color: white
+        padding: 2px
+        &.move
+          background: #e22525
+          border-color: #b31919
+        &.done
+          background: #1cb51c
+          border-color: green
+      &.filter_modal
+        top: 10%
+        height: 80%
+        width: 30%
+        left: 35%
+        padding: 5px 5px 5px 10px
+      &.import_modal
+        display: grid
+        grid-template-rows: 30px 100px
+        top: 33%
+        height: auto
+        .body #panel
+          border-style: dotted
+          border-color: #b1afaf
+          height: 93%
+          width: 350px
+          overflow: hidden
+          cursor: pointer
+          .content
+            span
+              color: #b1afaf
+              font-size: 12px
+              font-weight: bold
+              margin: 35px 55px
+              position: absolute
+            input
+              position: absolute
+              top: 34px
+              left: 5px
+              width: 97%
+              height: 72%
+              opacity: 0
+      &.new_issue_modal
+        z-index: 1000
+        left: 38%
+        position: fixed
+        overflow-y: auto
+        background-color: white
+        border: 1px solid #DCDCDC
+        box-shadow: 0px 0px 4px #000000
+        padding: 5px
+        top: 10%
+        bottom: 10%
+        width: 18%
+        height: fit-content
+        .values
+          justify-items: left
+          overflow-y: auto
+          width: 100%
+          label
+            cursor: default
+            margin-top: 10px
+      &.project_index_modal
+        top: 10%
+        height: 80%
+      .values
+        display: grid
+        justify-items: left
+        overflow-y: auto
+        width: 100%
+        height: 96%
+    .title
+      float: left
+      font-weight: bold
+
+    //\\//\\//\\ CHAT MODAL //\\//\\//\\
+    .chat_modal
+      width: 500px
+      bottom: 10%
+      top: 10%
+      padding: 0
+      overflow: hidden
+      height: fit-content
+      .head
+        background: #f5efe6
+        padding: 5px
+        box-shadow: 0px 0px 20px -10px #000000
+        position: absolute
+        width: 98%
+      .body
+        padding: 5px
+        margin-top: 10%
+        margin-bottom: 20%
+        .message
+          position: relative
+          margin: 10px 0
+          padding: 1px 10px
+          border-radius: 5px
+          width: fit-content
+          font-size: 0.8em
+          &.message-from
+            background: #af8d4226
+          &.message-to
+            float: right
+            background: #00800014
+          .time
+            font-size: 0.7em
+            color: #00000069
+      .footer
+        padding-top: 9px
+        background: #f5efe6
+        padding: 5px
+        box-shadow: 0px 3px 20px -10px #000000
+        textarea
+          margin-bottom: 5px!important

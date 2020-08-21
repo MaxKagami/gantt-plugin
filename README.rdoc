@@ -1,3 +1,0 @@
-= zaoeps_gantt
-
-Description goes here

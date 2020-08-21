@@ -1,0 +1,251 @@
+.gantt
+  .grid
+    font-size: 10px
+    display: flex
+    flex-direction: column
+    min-height: 21px
+    overflow-x: auto
+    width: 20%
+    overflow-y: hidden
+
+    .indent
+      display: block
+      float: left
+
+    .project_name
+      background-color: #dfccaf5e
+      display: flex
+      flex-flow: row nowrap
+      box-sizing: border-box
+      position: relative
+      width: 100vw
+      height: 15px
+      font-weight: bold
+      text-transform: uppercase
+      .indent
+        width: 20px
+      .icon_project:before
+        content: "\F2F6"
+        font-family: "Material Icons", sans-serif
+        font-size: 13px
+        color: #009ee0
+        padding-left: 4px
+        padding-right: 8px
+        line-height: 15px
+
+    .issue
+      display: flex
+      flex-flow: row nowrap
+      box-sizing: border-box
+      position: relative
+      width: 100vw
+      &:hover
+        .field .icon-edit
+          visibility: visible
+      .field
+        display: -webkit-box
+        overflow-x: hidden
+        word-wrap: break-word
+        white-space: normal
+        flex-shrink: 0
+        flex-grow: 0
+        padding: 0 3px
+        border-right: 2px solid #eee3d4
+        border-bottom: 1px solid #eee3d4
+        &.actions
+          img.add_action
+            margin-left: 2px
+            cursor: pointer
+          img.chat_action
+            margin-top: 1px
+            cursor: pointer
+        &.chooseable_field
+          display: none
+          width: 52px
+          *
+            display: inline-block
+          input
+            margin: 10% 0 0 25%
+          .submenu
+            &:hover ul
+              display: grid
+            ul
+              display: none
+              margin: 0
+              position: absolute
+              left: 31px
+              z-index: 10
+              transition: 0.5s ease-in-out
+              padding: 0
+              li div
+                width: -webkit-fill-available
+                line-height: 0.5rem
+                min-height: auto
+                text-align: center
+            button
+              padding: 0
+              margin-left: 2px
+              height: 13px
+              width: 13px
+              line-height: 0.5
+              font-size: smaller
+              vertical-align: -webkit-baseline-middle
+        &_value
+          padding-right: 10px
+        form
+          input
+            height: 20px
+            &:last-child
+              padding: 2px
+          select
+            height: 20px
+            line-height: 11px
+          .submit_button
+            height: 12px
+        .icon-edit
+          visibility: hidden
+          cursor: pointer
+          width: 1.5em !important
+          background: #ffffff
+          color: #42321a
+          border: 1px solid transparent
+          border-color: #dfccaf
+          border-radius: 1.5em
+          font-size: 80%
+          right: -1em
+          display: inline-block
+          line-height: 1.5em
+          text-align: center
+          &:hover
+            background: #41b35a
+            color: #ffffff
+            border-color: #3aa051
+            cursor: pointer
+        .numbers
+          margin: 0
+          margin-bottom: 10px
+          margin-right: 5px
+          white-space: nowrap
+          user-select: none
+        //\\//\\//\\//\\ INDICATORS //\\//\\//\\//\\
+        .indicator
+          width: 7px
+          height: 7px
+          border-radius: 7px
+          margin: 6px
+          &.before
+            background: #bbbbbb
+            box-shadow: 0px 0px 0px 4px #bbbbbb6e
+          &.late
+            background: #bbbbbb
+            box-shadow: 0px 0px 0px 4px #ff00002b
+          &.in_work
+            background: #4CAF50
+            box-shadow: 0px 0px 0px 4px #4caf505c
+          &.two_days
+            background: #4caf50bf
+            box-shadow: 0px 0px 0px 4px #ffcf0087
+          &.work_late
+            background: #ff0000b5
+            box-shadow: 0px 0px 0px 4px #ffab006e
+          &.late_critical
+            background: #ff0000f7
+            box-shadow: 0px 0px 0px 4px #ff00004d
+          &.done
+            margin: 2px 4px !important
+            padding-right: 4px
+            &:before
+              content: "\2713"
+              font-size: 12px
+              line-height: 1
+              font-weight: bolder
+              color: #168c1a
+      .icon_arrow
+        width: 13px
+        height: 100%
+        font-size: 13px
+        font-weight: bold
+        padding-left: 3px
+        padding-right: 7px
+        &:before
+          content: '\21B3'
+      .icon_folder
+        width: 23px
+        margin-left: 3px
+        &:before
+          content: url(data:image/gif;base64,R0lGODlhEgASAJECAJeXl7Gvrf///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTAyMTU1RTNDMDZEMTFFMUJGNzZCRThBRkFCRjg4MTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTAyMTU1RTRDMDZEMTFFMUJGNzZCRThBRkFCRjg4MTIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MDIxNTVFMUMwNkQxMUUxQkY3NkJFOEFGQUJGODgxMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MDIxNTVFMkMwNkQxMUUxQkY3NkJFOEFGQUJGODgxMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAIALAAAAAASABIAAAIwlI+pywcPm3mhWgkCsjBOvVkimElG9ZlCuYIY6TYs+6bmHDO4igfdD3GNhheV0VQAADs=)
+          transform: scale(.8)
+        &:hover
+          cursor: pointer
+      .indent
+        padding-left: 10px
+        padding: 13px
+        &:nth-last-of-type(1)
+          padding-right: 11px
+      .open .icon_folder:before
+        content: url(data:image/gif;base64,R0lGODlhEgASAJECAJeXl7Gvrf///wAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTdDRDM3QzVDMDZEMTFFMUJGMzhFMDhCN0RGRjBGQ0YiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTdDRDM3QzZDMDZEMTFFMUJGMzhFMDhCN0RGRjBGQ0YiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1N0NEMzdDM0MwNkQxMUUxQkYzOEUwOEI3REZGMEZDRiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMzdDNEMwNkQxMUUxQkYzOEUwOEI3REZGMEZDRiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAEAAAIALAAAAAASABIAAAIzlI+pywcPm3mhWgkCsjBOvVkimElG9ZlCBlXd+2XjjLKg5GqoeZXqvsOQXK/ijUZTKVUFADs=)
+        transform: scale(.8)
+
+    div
+        .switch
+          float: right
+          cursor: pointer
+          height: 12px
+          width: 12px
+          font-size: 12px
+          line-height: 14px
+
+    .version
+      position: relative
+      display: block
+
+    .heading
+      display: flex
+      flex-flow: row nowrap
+      box-sizing: border-box
+      .header
+        min-height: 20px
+        box-sizing: border-box
+        overflow-x: hidden
+        word-wrap: break-word
+        white-space: normal
+        flex-shrink: 0
+        flex-grow: 0
+        margin: 0 3px
+        line-height: 1
+        position: relative
+        padding: 0 2px
+        text-align: center
+        &_text
+          display: inline-block
+          font-weight: bold
+          vertical-align: -webkit-baseline-middle
+          vertical-align: -moz-middle-with-baseline
+          text-align: center
+        .choose_all
+          display: none
+          margin: 4px 0 0 0
+        .filter
+          position: absolute
+          top: 0
+          right: -5px
+          img
+            margin-right: 2px
+            cursor: pointer
+          &.avail
+            filter: brightness(50%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2)
+            img
+              margin-right: 2px
+              cursor: pointer
+              -webkit-filter: grayscale(100%)
+              filter: grayscale(100%)
+              opacity: 0.5
+
+    .split
+        min-height: 20px
+        box-sizing: border-box
+        overflow-x: hidden
+        flex-shrink: 0
+        flex-grow: 0
+        &:hover, &:focus, &:active
+          cursor: col-resize
