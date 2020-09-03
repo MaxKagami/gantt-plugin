@@ -130,7 +130,6 @@ class GanttController < ApplicationController
   end
 
   def color_rows
-
   end
 
   private

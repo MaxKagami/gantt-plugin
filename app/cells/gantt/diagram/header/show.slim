@@ -13,25 +13,25 @@ div
         form action="#{Setting.protocol}://#{Setting.host_name}/projects/#{project.id}/gantt/baseline/#{options[:baseline]&.identifier}/renew_dates.json"
           button.renew-button.button-2 Установить дату
   .zoom.hideable
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='week' name='query[period_zoom]'
     /   button week
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='decade' name='query[period_zoom]'
     /   button 10
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='month' name='query[period_zoom]'
     /   button month
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='quarter' name='query[period_zoom]'
     /   button quarter
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='half' name='query[period_zoom]'
     /   button half
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='year' name='query[period_zoom]'
     /   button year
-    / = form_for :settings, method: :get do |f|
+    / = form_for :evil_settings, method: :get do |f|
     /   input type='hidden' value='project' name='query[period_zoom]'
     /   button project
     = cell(Gantt::Diagram::ColumnsCell, model, project: project, setting: options[:setting])
